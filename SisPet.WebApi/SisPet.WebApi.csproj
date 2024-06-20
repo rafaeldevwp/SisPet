@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SisPet.Application\SisPet.Application.csproj" />
     <ProjectReference Include="..\SisPet.Domain\SisPet.Domain.csproj" />
+    <ProjectReference Include="..\SisPet.Infra\SisPet.Infra.csproj" />
   </ItemGroup>
 
 </Project>
