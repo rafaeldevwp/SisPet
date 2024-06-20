@@ -27,9 +27,9 @@ namespace SisPet.WebApi.Controllers
 
         // GET api/<PessoaController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Pessoa> Get(int id)
         {
-            return "value";
+            return await _pessoaService.GetById(id);
         }
 
         // POST api/<PessoaController>
@@ -42,12 +42,19 @@ namespace SisPet.WebApi.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<PessoaController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var pessoa = this.Get(id);
+
+            if (pessoa is not null)
+                  _pessoaService.Delete(pessoa.Id);
+
+           
         }
     }
 }
