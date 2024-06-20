@@ -16,7 +16,7 @@ namespace SisPet.Infra.PessoaRepositorio
 
         public void Add(Pessoa pessoa)
         {
-            string query = "INSERT INTO Pessoas(Nome,Idade,Email) Values (@Nome, @Idade, @Email)";
+            string query = "INSERT INTO Pessoa (Nome,Idade,Email) Values (@Nome, @Idade, @Email)";
             var parametros = new DynamicParameters();
 
             parametros.Add("Nome", pessoa.Nome);
@@ -39,7 +39,7 @@ namespace SisPet.Infra.PessoaRepositorio
 
         public async Task<IEnumerable<Pessoa>> Getall()
         {
-            string query = "SELECT * FROM Pessoas";
+            string query = "SELECT * FROM Pessoa";
             return await _dbConnection.QueryAsync<Pessoa>(query);
         }
 

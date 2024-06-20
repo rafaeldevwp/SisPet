@@ -1,6 +1,10 @@
 using System.Data;
 using System.Data.SqlClient;
+using SisPet.Application.Interfaces;
+using SisPet.Application.Servicos;
 using SisPet.Domain.Extensions;
+using SisPet.Domain.Interfaces;
+using SisPet.Infra.PessoaRepositorio;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,9 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDapper(builder.Configuration);
+
+builder.Services.AddScoped<IPessoaRepositorio, PessoaRepositorio>();
+builder.Services.AddScoped<IPessoaService, PessoaService>();
 
 var app = builder.Build();
 
