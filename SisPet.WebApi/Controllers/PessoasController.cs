@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SisPet.Application.Dto;
 using SisPet.Application.Interfaces;
@@ -11,10 +12,12 @@ namespace SisPet.WebApi.Controllers;
 public class PessoasController : ControllerBase
 {
     private readonly IPessoaService _pessoaService;
+    private readonly IMapper _mapper;
 
-    public PessoasController(IPessoaService pessoaService)
+    public PessoasController(IPessoaService pessoaService, IMapper mapper)
     {
         _pessoaService = pessoaService;
+        _mapper = mapper;
     }
 
     // GET: api/<PessoaController>
@@ -37,18 +40,9 @@ public class PessoasController : ControllerBase
     {
         if (pessoaDTO != null)
         {
-            var pessoaEntite = new Pessoa
-            {
-                Nome = pessoaDTO.Nome,
-                Email = pessoaDTO.Email,
-                Idade = pessoaDTO.Idade
-            };
-
-            _pessoaService.Add(pessoaEntite);
-
+            var pessoa = _mapper.Map<Pessoa>(pessoaDTO);
+            _pessoaService.Add(pessoa);
         }
-
-
         return;
     }
 

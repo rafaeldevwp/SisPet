@@ -28,7 +28,7 @@ namespace SisPet.Infra.PessoaRepositorio
 
         public void Delete(Pessoa pessoa)
         {
-            string query = "DELETE FROM Pessoas Where Id = @Id";
+            string query = "DELETE FROM Pessoa Where Id = @Id";
            
             var parametros = new DynamicParameters();
             parametros.Add("Id", pessoa.Id);
@@ -45,7 +45,7 @@ namespace SisPet.Infra.PessoaRepositorio
 
         public async Task<Pessoa> GetById(int id)
         {
-            string query = "SELECT * FROM Pessoas WHERE Id = @Id";
+            string query = "SELECT * FROM Pessoa WHERE Id = @Id";
 
             var parametros = new DynamicParameters();
             parametros.Add("Id", id);

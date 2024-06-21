@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,6 +12,9 @@ namespace SisPet.Domain.Extensions
         {
             services.AddScoped<IDbConnection>(sp =>
                 new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
+
         }
+
+
     }
 }

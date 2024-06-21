@@ -11,6 +11,7 @@
 
   </ItemGroup>
 
+
   <ItemGroup>
     <ProjectReference Include="..\SisPet.Application\SisPet.Application.csproj" />
     <ProjectReference Include="..\SisPet.Domain\SisPet.Domain.csproj" />

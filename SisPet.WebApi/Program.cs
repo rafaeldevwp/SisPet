@@ -1,6 +1,5 @@
-using System.Data;
-using System.Data.SqlClient;
 using SisPet.Application.Interfaces;
+using SisPet.Application.Mapper;
 using SisPet.Application.Servicos;
 using SisPet.Domain.Extensions;
 using SisPet.Domain.Interfaces;
@@ -20,6 +19,8 @@ builder.Services.AddDapper(builder.Configuration);
 
 builder.Services.AddScoped<IPessoaRepositorio, PessoaRepositorio>();
 builder.Services.AddScoped<IPessoaService, PessoaService>();
+builder.Services.AddAutoMapper(typeof(MappingsProfile).Assembly);
+
 
 var app = builder.Build();
 
@@ -37,3 +38,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
