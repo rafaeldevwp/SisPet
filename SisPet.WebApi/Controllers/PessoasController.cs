@@ -22,28 +22,40 @@ public class PessoasController : ControllerBase
 
     // GET: api/<PessoaController>
     [HttpGet]
-    public async Task<IEnumerable<Pessoa>> Get()
+    public async Task<ActionResult<IEnumerable<Pessoa>>> GetAll()
     {
-        return await _pessoaService.Getall();
+        var pessoas = await _pessoaService.Getall();
+
+        return Ok(pessoas);
     }
 
     // GET api/<PessoaController>/5
     [HttpGet("{id}")]
-    public async Task<Pessoa> Get(int id)
+    public async Task<ActionResult<Pessoa>> Get(int id)
     {
-        return await _pessoaService.GetById(id);
+        var pessoa = await _pessoaService.GetById(id);
+        if (pessoa is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(pessoa);
     }
 
     // POST api/<PessoaController>
     [HttpPost]
-    public void Post([FromBody] PessoaDTO pessoaDTO)
+    public ActionResult<Pessoa> Post([FromBody] PessoaDTO pessoaDTO)
     {
         if (pessoaDTO != null)
         {
             var pessoa = _mapper.Map<Pessoa>(pessoaDTO);
+
             _pessoaService.Add(pessoa);
+            return CreatedAtAction(nameof(Get), new { id = pessoa.Id }, pessoa);
         }
-        return;
+
+        return BadRequest();
+       
     }
 
     // PUT api/<PessoaController>/5
@@ -55,12 +67,19 @@ public class PessoasController : ControllerBase
 
     // DELETE api/<PessoaController>/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-        //var pessoa? = this.Get(id);
+        var pessoa = await _pessoaService.GetById(id);
 
-        //if (pessoa != null)
-        //    _pessoaService.Delete(pessoa.Id);
+        if (pessoa != null)
+        {
+            _pessoaService.Delete(pessoa);
+            return NoContent();
+        }
+
+        return NotFound();  
+           
+
     }
 
 }
